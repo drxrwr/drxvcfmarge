@@ -18,7 +18,7 @@ document.getElementById("fileInput").addEventListener("change", function(event) 
     document.getElementById("fileCount").textContent = `${files.length} file`;
 });
 
-// Buat drag-and-drop bisa digunakan
+// Aktifkan drag-and-drop untuk urutan file
 new Sortable(document.getElementById("fileList"), {
     animation: 150,
     ghostClass: 'sortable-ghost'
