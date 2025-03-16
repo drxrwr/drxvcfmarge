@@ -1,76 +1,62 @@
 body {
     font-family: Arial, sans-serif;
+    text-align: center;
     background-color: white;
     color: black;
-    text-align: center;
-    margin: 0;
-    padding: 20px;
+    margin: 20px;
 }
 
-.container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+h1 {
+    margin-bottom: 10px;
 }
 
-input[type="file"], input[type="text"] {
-    display: block;
-    margin: 10px auto;
+input[type="text"] {
+    width: 80%;
     padding: 8px;
-    width: 90%;
+    margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="file"] {
+    margin: 10px 0;
+}
+
+#fileCount {
     font-size: 14px;
+    color: gray;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 5px auto;
+    background: white;
+    border-radius: 5px;
+    cursor: grab;
+    width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 button {
     background-color: green;
     color: white;
     border: none;
-    padding: 10px 15px;
-    cursor: pointer;
+    padding: 10px 20px;
+    margin: 10px;
     border-radius: 5px;
+    cursor: pointer;
     font-size: 16px;
-    margin: 5px;
 }
 
 button:hover {
     background-color: darkgreen;
-}
-
-#resetButton {
-    background-color: red;
-}
-
-#resetButton:hover {
-    background-color: darkred;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-ul li {
-    background: white;
-    margin: 5px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    cursor: grab;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#outputFileName {
-    font-weight: bold;
-    margin-top: 10px;
 }
