@@ -1,10 +1,6 @@
-document.getElementById("fileInput").addEventListener("change", handleFileSelect);
-document.getElementById("mergeButton").addEventListener("click", mergeVCF);
-document.getElementById("resetButton").addEventListener("click", resetFiles);
+let fileData = [];
 
-let fileData = []; // Menyimpan file VCF yang diunggah
-
-function handleFileSelect(event) {
+document.getElementById("fileInput").addEventListener("change", function(event) {
     const files = event.target.files;
     const fileList = document.getElementById("fileList");
     fileList.innerHTML = "";
@@ -19,58 +15,46 @@ function handleFileSelect(event) {
         fileData.push(file);
     }
 
-    new Sortable(fileList, {
-        animation: 150,
-        ghostClass: 'sortable-ghost'
-    });
-}
+    document.getElementById("fileCount").textContent = `${files.length} file`;
+});
 
-function mergeVCF() {
-    const fileList = document.querySelectorAll("#fileList li");
-    let mergedData = "";
-    let filePromises = [];
+// Buat drag-and-drop bisa digunakan
+new Sortable(document.getElementById("fileList"), {
+    animation: 150,
+    ghostClass: 'sortable-ghost'
+});
 
-    fileList.forEach((item) => {
-        let index = item.dataset.index;
-        let file = fileData[index];
+// Fungsi gabung file
+document.getElementById("mergeButton").addEventListener("click", async function() {
+    if (fileData.length === 0) {
+        alert("Pilih minimal 1 file VCF.");
+        return;
+    }
 
-        let reader = new FileReader();
-        filePromises.push(
-            new Promise((resolve) => {
-                reader.onload = function (e) {
-                    resolve(e.target.result);
-                };
-                reader.readAsText(file);
-            })
-        );
-    });
+    const outputFileName = document.getElementById("outputFileName").value.trim();
+    const finalFileName = outputFileName ? `${outputFileName}.vcf` : "Gabungan.vcf";
 
-    Promise.all(filePromises).then((fileContents) => {
-        mergedData = fileContents.join("\n");
+    let mergedContent = "";
+    
+    for (let item of document.querySelectorAll("#fileList li")) {
+        let fileIndex = item.dataset.index;
+        let file = fileData[fileIndex];
+        let text = await file.text();
+        mergedContent += text + "\n";
+    }
 
-        let fileName = document.getElementById("fileNameInput").value.trim();
-        if (fileName === "") {
-            fileName = "merged_contacts";
-        }
-        fileName += ".vcf";
+    const blob = new Blob([mergedContent], { type: "text/vcard" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = finalFileName;
+    link.click();
+});
 
-        let blob = new Blob([mergedData], { type: "text/vcard" });
-        let link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = fileName;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        // Tampilkan nama file hasil
-        document.getElementById("outputFileName").textContent = "File hasil: " + fileName;
-    });
-}
-
-function resetFiles() {
+// Fungsi reset
+document.getElementById("resetButton").addEventListener("click", function() {
     document.getElementById("fileInput").value = "";
     document.getElementById("fileList").innerHTML = "";
-    document.getElementById("fileNameInput").value = "";
-    document.getElementById("outputFileName").textContent = "";
+    document.getElementById("fileCount").textContent = "0 file";
+    document.getElementById("outputFileName").value = "";
     fileData = [];
-}
+});
