@@ -16,9 +16,14 @@ body {
     background-color: #f9f9f9;
 }
 
-input[type="file"] {
+input[type="file"], input[type="text"] {
     display: block;
     margin: 10px auto;
+    padding: 8px;
+    width: 90%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
 button {
@@ -29,15 +34,26 @@ button {
     cursor: pointer;
     border-radius: 5px;
     font-size: 16px;
+    margin: 5px;
 }
 
 button:hover {
     background-color: darkgreen;
 }
 
+#resetButton {
+    background-color: red;
+}
+
+#resetButton:hover {
+    background-color: darkred;
+}
+
 ul {
     list-style: none;
     padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 ul li {
@@ -46,4 +62,15 @@ ul li {
     padding: 10px;
     border: 1px solid #ccc;
     cursor: grab;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#outputFileName {
+    font-weight: bold;
+    margin-top: 10px;
 }
