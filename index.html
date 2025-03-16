@@ -9,21 +9,19 @@
 <body>
 
     <h1>Gabung File VCF</h1>
-    
-    <!-- Input untuk nama file hasil gabungan -->
-    <input type="text" id="outputFileName" placeholder="Masukkan nama file hasil">
 
-    <!-- Input untuk memilih file -->
+    <!-- Input file -->
     <input type="file" id="fileInput" multiple accept=".vcf">
     <p id="fileCount">0 file</p>
 
-    <!-- Daftar file yang akan digabung -->
+    <!-- Daftar file -->
     <ul id="fileList"></ul>
 
-    <!-- Tombol Gabungkan & Unduh -->
+    <!-- Input nama file hasil gabungan (Dipindah ke atas tombol) -->
+    <input type="text" id="outputFileName" placeholder="Masukkan nama file hasil">
+
+    <!-- Tombol gabung dan reset -->
     <button id="mergeButton">Gabungkan & Unduh</button>
-    
-    <!-- Tombol Reset -->
     <button id="resetButton">Reset</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
