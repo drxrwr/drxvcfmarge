@@ -1,5 +1,6 @@
 document.getElementById("fileInput").addEventListener("change", handleFileSelect);
 document.getElementById("mergeButton").addEventListener("click", mergeVCF);
+document.getElementById("resetButton").addEventListener("click", resetFiles);
 
 let fileData = []; // Menyimpan file VCF yang diunggah
 
@@ -27,7 +28,6 @@ function handleFileSelect(event) {
 function mergeVCF() {
     const fileList = document.querySelectorAll("#fileList li");
     let mergedData = "";
-
     let filePromises = [];
 
     fileList.forEach((item) => {
@@ -48,12 +48,29 @@ function mergeVCF() {
     Promise.all(filePromises).then((fileContents) => {
         mergedData = fileContents.join("\n");
 
+        let fileName = document.getElementById("fileNameInput").value.trim();
+        if (fileName === "") {
+            fileName = "merged_contacts";
+        }
+        fileName += ".vcf";
+
         let blob = new Blob([mergedData], { type: "text/vcard" });
         let link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
-        link.download = "merged_contacts.vcf";
+        link.download = fileName;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+
+        // Tampilkan nama file hasil
+        document.getElementById("outputFileName").textContent = "File hasil: " + fileName;
     });
+}
+
+function resetFiles() {
+    document.getElementById("fileInput").value = "";
+    document.getElementById("fileList").innerHTML = "";
+    document.getElementById("fileNameInput").value = "";
+    document.getElementById("outputFileName").textContent = "";
+    fileData = [];
 }
