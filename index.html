@@ -7,16 +7,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Gabung File VCF</h1>
-        <input type="file" id="fileInput" multiple accept=".vcf">
-        <ul id="fileList"></ul>
-        <input type="text" id="fileNameInput" placeholder="Masukkan nama file (tanpa .vcf)">
-        <button id="mergeButton">Gabungkan & Unduh</button>
-        <p id="outputFileName"></p>
-        <button id="resetButton">Reset</button>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+
+    <h1>Gabung File VCF</h1>
+    
+    <!-- Input untuk nama file hasil gabungan -->
+    <input type="text" id="outputFileName" placeholder="Masukkan nama file hasil">
+
+    <!-- Input untuk memilih file -->
+    <input type="file" id="fileInput" multiple accept=".vcf">
+    <p id="fileCount">0 file</p>
+
+    <!-- Daftar file yang akan digabung -->
+    <ul id="fileList"></ul>
+
+    <!-- Tombol Gabungkan & Unduh -->
+    <button id="mergeButton">Gabungkan & Unduh</button>
+    
+    <!-- Tombol Reset -->
+    <button id="resetButton">Reset</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
     <script src="script.js"></script>
+
 </body>
 </html>
